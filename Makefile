@@ -1,5 +1,6 @@
 MAIN_PG_PATH := main/pg
 MAIN_MYSQL_PATH := main/mysql
+MAIN_MARIADB_PATH := main/mariadb
 MAIN_REDIS_PATH := main/redis
 MAIN_MONGO_PATH := main/mongo
 DOCKER_COMMON := golang ubuntu s3
@@ -61,7 +62,7 @@ all_unittests: install deps lint unittest
 pg_int_tests_only:
 	docker-compose build pg_tests
 	docker-compose up --exit-code-from pg_tests pg_tests
-	
+
 pg_clean:
 	(cd $(MAIN_PG_PATH) && go clean)
 	./cleanup.sh
@@ -93,6 +94,16 @@ mysql_clean:
 
 mysql_install: mysql_build
 	mv $(MAIN_MYSQL_PATH)/wal-g $(GOBIN)/wal-g
+
+mariadb_test: install deps mariadb_build lint unlink_brotli mariadb_integration_test
+
+mariadb_build: $(CMD_FILES) $(PKG_FILES)
+	(cd $(MAIN_MARIADB_PATH) && go build -mod vendor -tags "$(BUILD_TAGS)" -o wal-g -ldflags "-s -w -X github.com/wal-g/wal-g/cmd/mariadb.BuildDate=`date -u +%Y.%m.%d_%H:%M:%S` -X github.com/wal-g/wal-g/cmd/mariadb.GitRevision=`git rev-parse --short HEAD` -X github.com/wal-g/wal-g/cmd/mariadb.WalgVersion=`git tag -l --points-at HEAD`")
+
+mariadb_integration_test: load_docker_common
+	docker-compose build mariadb mariadb_tests
+	docker-compose up --exit-code-from mariadb_tests mariadb_tests
+
 
 mongo_test: install deps mongo_build lint unlink_brotli
 

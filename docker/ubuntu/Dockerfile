@@ -16,6 +16,4 @@ RUN apt-get update && \
     lzop \
     libbrotli1 && \
     rm -rf /var/lib/apt/lists/* && \
-    pip3 install git+https://github.com/wal-e/wal-e.git && \
     pip3 install boto
-
