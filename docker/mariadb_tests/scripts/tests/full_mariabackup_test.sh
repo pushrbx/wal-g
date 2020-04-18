@@ -1,12 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 set -e -x
 
 . /usr/local/export_common.sh
 
-export WALE_S3_PREFIX=s3://mariadbfullmysqldumpbucket
-export WALG_STREAM_CREATE_COMMAND="mysqldump --all-databases --single-transaction"
-export WALG_STREAM_RESTORE_COMMAND="mysql"
-export WALG_MARIADB_BACKUP_PREPARE_COMMAND=
+export WALE_S3_PREFIX=s3://mariadbfullmariabackupbucket
 
 
 mysql_install_db > /dev/null
@@ -22,15 +19,14 @@ mysqldump sbtest > /tmp/dump_before_backup
 
 wal-g backup-push
 
-
-ps aux | grep mysqld_safe
-
 mariadb_kill_and_clean_data
+
+wal-g backup-fetch LATEST
+
+chown -R mysql:mysql $MYSQLDATA
 
 mysql_install_db > /dev/null
 service mysql start
-
-wal-g backup-fetch LATEST
 
 mysqldump sbtest > /tmp/dump_after_restore
 

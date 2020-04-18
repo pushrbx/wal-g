@@ -9,8 +9,8 @@ export WALG_STREAM_CREATE_COMMAND="mariabackup --backup \
     --parallel=2 \
     --datadir=${MYSQLDATA}"
 export WALG_STREAM_RESTORE_COMMAND="mbstream -x -C ${MYSQLDATA}"
-export WALG_MYSQL_BACKUP_PREPARE_COMMAND="mariabackup --prepare --target-dir=${MYSQLDATA}"
-export WALG_MYSQL_BINLOG_REPLAY_COMMAND="mysqlbinlog -v - | mysql"
+export WALG_MARIADB_BACKUP_PREPARE_COMMAND="mariabackup --prepare --target-dir=${MYSQLDATA}"
+
 
 # test tools
 mariadb_kill_and_clean_data() {
