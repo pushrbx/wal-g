@@ -25,7 +25,6 @@ wal-g backup-fetch LATEST
 
 chown -R mysql:mysql $MYSQLDATA
 
-mysql_install_db > /dev/null
 service mysql start
 
 mysqldump sbtest > /tmp/dump_after_restore

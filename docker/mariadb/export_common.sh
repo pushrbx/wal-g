@@ -10,6 +10,8 @@ export WALG_STREAM_CREATE_COMMAND="mariabackup --backup \
     --datadir=${MYSQLDATA}"
 export WALG_STREAM_RESTORE_COMMAND="mbstream -x -C ${MYSQLDATA}"
 export WALG_MARIADB_BACKUP_PREPARE_COMMAND="mariabackup --prepare --target-dir=${MYSQLDATA}"
+export WALG_MARIADB_BINLOG_REPLAY_COMMAND='mysqlbinlog --stop-datetime="$WALG_MARIADB_BINLOG_END_TS" "$WALG_MARIADB_CURRENT_BINLOG" | mysql'
+export WALG_MARIADB_BINLOG_DST=/tmp
 
 
 # test tools

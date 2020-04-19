@@ -55,9 +55,11 @@ const (
 	MysqlBinlogDstSetting      = "WALG_MYSQL_BINLOG_DST"
 	MysqlBackupPrepareCmd      = "WALG_MYSQL_BACKUP_PREPARE_COMMAND"
 
-    MariadbDatasourceNameSetting = "WALG_MARIADB_DATASOURCE_NAME"
-    MariadbSslCaSetting          = "WALG_MARIADB_SSL_CA"
-    MariadbBackupPrepareCmd      = "WALG_MARIADB_BACKUP_PREPARE_COMMAND"
+	MariadbDatasourceNameSetting = "WALG_MARIADB_DATASOURCE_NAME"
+	MariadbSslCaSetting          = "WALG_MARIADB_SSL_CA"
+	MariadbBackupPrepareCmd      = "WALG_MARIADB_BACKUP_PREPARE_COMMAND"
+	MariadbBinlogReplayCmd       = "WALG_MARIADB_BINLOG_REPLAY-COMMAND"
+	MariadbBinlogDstSetting      = "WALG_MARIADB_BINLOG_DST"
 )
 
 var (
@@ -171,11 +173,13 @@ var (
 		MysqlBinlogDstSetting:      true,
 		MysqlBackupPrepareCmd:      true,
 
-        // MariaDB
-        MariadbDatasourceNameSetting: true,
-        MariadbSslCaSetting:          true,
-        MariadbBackupPrepareCmd:      true,
-    }
+		// MariaDB
+		MariadbDatasourceNameSetting: true,
+		MariadbSslCaSetting:          true,
+		MariadbBackupPrepareCmd:      true,
+		MariadbBinlogReplayCmd:       true,
+		MariadbBinlogDstSetting:      true,
+	}
 )
 
 func isAllowedSetting(setting string, AllowedSettings map[string]bool) (exists bool) {
