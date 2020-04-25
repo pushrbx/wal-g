@@ -364,6 +364,28 @@ services:
     links:
       - s3
 
+  mariadb:
+    build:
+      dockerfile: docker/mariadb/Dockerfile
+      context: .
+    image: wal-g/mariadb
+    container_name: wal-g_mariadb
+
+  mariadb_tests:
+    build:
+      dockerfile: docker/mariadb_tests/Dockerfile
+      context: .
+    security_opt:
+      - seccomp:unconfined
+    image: wal-g/mariadb_tests
+    container_name: wal-g_mariadb_tests
+    env_file:
+      - docker/common/common_walg.env
+    depends_on:
+      - s3
+    links:
+      - s3
+
   redis:
     build:
       dockerfile: docker/redis/Dockerfile

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e -x
 
 . /usr/local/export_common.sh
@@ -26,7 +26,7 @@ wal-g backup-fetch LATEST
 chown -R mysql:mysql $MYSQLDATA
 
 mysql_install_db > /dev/null
-service mysql start
+service mysql start || (cat /var/log/mysql/error.log && false)
 
 mysqldump sbtest > /tmp/dump_after_restore
 

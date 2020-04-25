@@ -3,18 +3,16 @@ FROM wal-g/ubuntu:latest
 # mb not another path
 ENV MYSQLDATA /var/lib/mysql
 
+# fixme: the package of MariaDB 10.4 doesn't work in this environement because it's not being added to the services.
 RUN apt-get update && \
-    apt-get install --yes --no-install-recommends --no-install-suggests software-properties-common && \
-    apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 && \
-    add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.mephi.ru/mariadb/repo/10.3/ubuntu bionic main' && \
+    apt-get install --yes --no-install-recommends --no-install-suggests software-properties-common dirmngr gnupg2 curl && \
+    curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | /bin/bash -s -- --mariadb-server-version="mariadb-10.3" && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install --yes \
-    curl \
     mariadb-server \
     mariadb-client \
     mariadb-backup \
     percona-xtrabackup
-
 
 RUN curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | bash && apt -y install sysbench
 RUN rm -rf $MYSQLDATA
