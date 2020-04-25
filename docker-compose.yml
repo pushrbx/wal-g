@@ -46,6 +46,10 @@ services:
       &&  mkdir -p /export/mysqlbinlogreplaybucket
       &&  mkdir -p /export/mysqlpitrxtrabackupbucket
       &&  mkdir -p /export/mysqlpitrmysqldumpbucket
+      &&  mkdir -p /export/mariadbfullmysqldumpbucket
+      &&  mkdir -p /export/mariadbfullmariabackupbucket
+      &&  mkdir -p /export/mariadbpitrmariabackupbucket
+      &&  mkdir -p /export/mariadbpitrmysqldumpbucket
       &&  mkdir -p /export/mongostreampushbucket
       &&  mkdir -p /export/mongooplogpushbucket
       &&  mkdir -p /export/mongodeletebeforebucket
