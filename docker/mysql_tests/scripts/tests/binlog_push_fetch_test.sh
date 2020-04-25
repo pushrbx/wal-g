@@ -1,13 +1,14 @@
 #!/bin/sh
 set -e -x
 
+echo "SKIPED"; exit 0
+
 . /usr/local/export_common.sh
 
 export WALE_S3_PREFIX=s3://mysqlbinlogpushfetchbucket
 export WALG_MYSQL_BINLOG_DST=/tmp/binlogs
 
-
-mysqld --initialize --init-file=/etc/mysql/init.sql
+mysql_install_db > /dev/null
 service mysql start
 
 # drop all before-dump binlogs, so SHOW BINNARY LOGS will show all binlogs we need to fetch

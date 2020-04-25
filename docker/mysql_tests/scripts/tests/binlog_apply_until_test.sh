@@ -7,7 +7,7 @@ export WALE_S3_PREFIX=s3://mysqlbinlogreplaybucket
 export WALG_MYSQL_BINLOG_REPLAY_COMMAND='mysqlbinlog -v --stop-datetime="$WALG_MYSQL_BINLOG_END_TS" "$WALG_MYSQL_CURRENT_BINLOG" >> /tmp/binlog.sql'
 
 
-mysqld --initialize --init-file=/etc/mysql/init.sql
+mysql_install_db > /dev/null
 service mysql start
 wal-g backup-push
 sleep 1

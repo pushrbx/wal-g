@@ -10,7 +10,7 @@ export WALG_STREAM_CREATE_COMMAND="mysqldump --all-databases --single-transactio
 export WALG_STREAM_RESTORE_COMMAND="mysql"
 export WALG_MYSQL_BACKUP_PREPARE_COMMAND=
 
-mysqld --initialize --init-file=/etc/mysql/init.sql
+mysql_install_db > /dev/null
 service mysql start
 
 # first full backup
@@ -39,8 +39,8 @@ wal-g binlog-push
 
 
 # pitr restore after LATEST backup
-mysql_kill_and_clean_data
-mysqld --initialize --init-file=/etc/mysql/init.sql
+mariadb_kill_and_clean_data
+mysql_install_db > /dev/null
 service mysql start
 wal-g backup-fetch LATEST
 
@@ -53,8 +53,8 @@ grep -w 'testpitr03' /tmp/dump_after_pitr
 
 
 # pitr restore across full backup
-mysql_kill_and_clean_data
-mysqld --initialize --init-file=/etc/mysql/init.sql
+mariadb_kill_and_clean_data
+mysql_install_db > /dev/null
 service mysql start
 wal-g backup-fetch $FIRST_BACKUP
 

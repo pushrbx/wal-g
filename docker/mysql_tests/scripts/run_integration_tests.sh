@@ -11,5 +11,5 @@ for i in /tmp/tests/*; do
   set +x
   echo "===== SUCCESS $i ====="
   echo
-  mysql_kill_and_clean_data
+  mariadb_kill_and_clean_data
 done
