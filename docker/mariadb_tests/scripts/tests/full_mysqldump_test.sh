@@ -6,7 +6,7 @@ set -e -x
 export WALE_S3_PREFIX=s3://mariadbfullmysqldumpbucket
 export WALG_STREAM_CREATE_COMMAND="mysqldump --all-databases --single-transaction"
 export WALG_STREAM_RESTORE_COMMAND="mysql"
-export WALG_MARIADB_BACKUP_PREPARE_COMMAND=
+export WALG_MYSQL_BACKUP_PREPARE_COMMAND=
 
 
 mysql_install_db > /dev/null
