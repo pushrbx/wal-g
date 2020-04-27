@@ -50,6 +50,9 @@ services:
       &&  mkdir -p /export/mariadbfullmariabackupbucket
       &&  mkdir -p /export/mariadbpitrmariabackupbucket
       &&  mkdir -p /export/mariadbpitrmysqldumpbucket
+      &&  mkdir -p /export/mariadbbinlogpushfetchbucket
+      &&  mkdir -p /export/mariadbbinlogreplaybucket
+      &&  mkdir -p /export/mariadbdeleteendtoendbucket
       &&  mkdir -p /export/mongostreampushbucket
       &&  mkdir -p /export/mongooplogpushbucket
       &&  mkdir -p /export/mongodeletebeforebucket

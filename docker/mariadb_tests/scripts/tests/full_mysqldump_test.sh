@@ -10,7 +10,8 @@ export WALG_MYSQL_BACKUP_PREPARE_COMMAND=
 
 
 mysql_install_db > /dev/null
-service mysql start
+
+service mysql start || (cat /var/log/mysql/error.log && false)
 
 sysbench --table-size=10 prepare
 
@@ -24,6 +25,7 @@ wal-g backup-push
 
 
 ps aux | grep mysqld_safe
+pidof mysqld_safe
 
 mariadb_kill_and_clean_data
 

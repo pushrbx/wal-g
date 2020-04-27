@@ -25,7 +25,7 @@ endif
 
 .PHONY: unittest fmt lint install clean
 
-test: install deps lint unittest pg_build mysql_build redis_build mongo_build unlink_brotli pg_integration_test mysql_integration_test redis_integration_test
+test: install deps lint unittest pg_build mysql_build redis_build mongo_build unlink_brotli pg_integration_test mysql_integration_test mariadb_integration_test redis_integration_test
 
 pg_test: install deps pg_build lint unlink_brotli pg_integration_test
 
